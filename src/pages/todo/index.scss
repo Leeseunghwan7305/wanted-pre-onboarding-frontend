@@ -1,2 +1,78 @@
-.todoList {
+.todopage {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(
+    to right top,
+    #d16ba5,
+    #c777b9,
+    #ba83ca,
+    #aa8fd8,
+    #9a9ae1,
+    #8aa7ec,
+    #79b3f4,
+    #69bff8,
+    #52cffe,
+    #41dfff,
+    #46eefa,
+    #5ffbf1
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.todopage-todoList {
+  & > h1 {
+    font-size: 3rem;
+    margin: 2rem;
+    text-align: center;
+    @media (max-width: 768px) {
+      font-size: 30px;
+    }
+  }
+
+  & > input {
+    display: flex;
+  }
+}
+
+.todoList-header {
+  display: flex;
+  margin-bottom: 1rem;
+  margin-top: 50px;
+  & > input {
+    padding: 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    width: 50rem;
+    height: 5rem;
+    @media (max-width: 768px) {
+      zoom: 0.8;
+      width: 55rem;
+      height: 40px;
+    }
+  }
+}
+
+.todopage-todoList-work {
+  height: 50vh;
+  overflow: scroll;
+}
+
+.todoList-header-button {
+  width: 8rem;
+  height: 5rem;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+  &:hover {
+    scale: 1.02;
+  }
+  @media (max-width: 768px) {
+    zoom: 0.8;
+    width: 14rem;
+    height: 40px;
+  }
 }

@@ -1,6 +1,6 @@
 import React from "react";
-import { NonClickedTodoProps } from "../types/todo";
-
+import { NonClickedTodoProps } from "../../types/todo";
+import "./index.scss";
 const NoClickedTodo = ({
   todo,
   retouchHandler,
@@ -10,7 +10,7 @@ const NoClickedTodo = ({
   checkBoxhandle,
 }: NonClickedTodoProps) => {
   return (
-    <>
+    <div className="nonClickTodo">
       <li key={id}>
         <label>
           <input
@@ -21,18 +21,20 @@ const NoClickedTodo = ({
           />
         </label>
         <span>{todo}</span>
-        <button
-          data-testid="modify-button"
-          id={id}
-          onClick={() => retouchHandler(id)}
-        >
-          수정
-        </button>
-        <button onClick={() => deleteTodo(id)} data-testid="delete-button">
-          삭제
-        </button>
+        <div>
+          <button
+            data-testid="modify-button"
+            id={id}
+            onClick={() => retouchHandler(id)}
+          >
+            수정
+          </button>
+          <button onClick={() => deleteTodo(id)} data-testid="delete-button">
+            삭제
+          </button>
+        </div>
       </li>
-    </>
+    </div>
   );
 };
 

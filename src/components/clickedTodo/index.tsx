@@ -1,6 +1,6 @@
 import React from "react";
-import { ClickedTodoProps } from "../types/todo";
-
+import { ClickedTodoProps } from "../../types/todo";
+import "./index.scss";
 const ClickedTodo = ({
   editInput,
   editChangeHandler,
@@ -11,7 +11,7 @@ const ClickedTodo = ({
   isCompleted,
 }: ClickedTodoProps) => {
   return (
-    <>
+    <div className="clickTodo">
       <li key={id}>
         <label>
           <input
@@ -27,14 +27,16 @@ const ClickedTodo = ({
           onChange={editChangeHandler}
           placeholder="수정될 내용을 입력해주세요"
         ></input>
-        <button id={id} onClick={updateTodo} data-testid="submit-button">
-          제출
-        </button>
-        <button onClick={() => cancelHandler(id)} data-testid="cancel-button">
-          취소
-        </button>
+        <div>
+          <button id={id} onClick={updateTodo} data-testid="submit-button">
+            제출
+          </button>
+          <button onClick={() => cancelHandler(id)} data-testid="cancel-button">
+            취소
+          </button>
+        </div>
       </li>
-    </>
+    </div>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInApi } from "../../api/signInApi";
 import useInput from "../../hook/useInput";
+import { tokenTest } from "../../util/tokenTest";
 import { emailValidation, passwordValidation } from "../../util/validation";
 import "./index.scss";
 const SignIn = () => {
@@ -25,6 +26,12 @@ const SignIn = () => {
     }
   }, [emailError, passwordError]);
 
+  useEffect(() => {
+    if (tokenTest()) {
+      navigator("/todo", { replace: true });
+    }
+  }, []);
+
   //로그인 버튼을 눌렀을때 실행되는 함수입니다.
   const handleSubmit = async () => {
     try {
@@ -39,7 +46,9 @@ const SignIn = () => {
   };
   return (
     <div className="signInBox">
+      <h1>로그인</h1>
       <input
+        className="signInBox-email"
         value={email}
         placeholder="이메일을 입력해주세요."
         onChange={emailHandler}
@@ -53,6 +62,7 @@ const SignIn = () => {
         <div className="signUpBox_email-success"></div>
       )}
       <input
+        className="signInBox-password"
         value={password}
         placeholder="비밀번호를 입력해주세요."
         onChange={passwordHandler}

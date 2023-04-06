@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpApi } from "../../api/signUpApi";
 import useInput from "../../hook/useInput";
+import { tokenTest } from "../../util/tokenTest";
 import { emailValidation, passwordValidation } from "../../util/validation";
 import "./index.scss";
 
@@ -26,6 +27,12 @@ const SignUp = () => {
     }
   }, [emailError, passwordError]);
 
+  useEffect(() => {
+    if (tokenTest()) {
+      navigator("/todo", { replace: true });
+    }
+  }, []);
+
   //회원가입 버튼을 눌렀을떄 실행될 함수입니다.
   const handleSubmit = async () => {
     try {
@@ -38,6 +45,7 @@ const SignUp = () => {
   };
   return (
     <div className="signUpBox">
+      <h1>회원가입</h1>
       <input
         value={email}
         placeholder="이메일을 입력해주세요."

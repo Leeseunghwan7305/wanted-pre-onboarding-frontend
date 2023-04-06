@@ -1,5 +1,15 @@
+import { useNavigate } from "react-router-dom";
+import "./index.scss";
 const Init = () => {
-  return <div>안녕하세영 반가워영</div>;
+  const navigator = useNavigate();
+  return (
+    <div className="init">
+      <button onClick={() => navigator("/signup")} className="fun-btn">
+        회원가입페이지로
+        <br /> 이동하기!
+      </button>
+    </div>
+  );
 };
 
 export default Init;

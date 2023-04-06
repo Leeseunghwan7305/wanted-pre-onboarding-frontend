@@ -19,7 +19,7 @@ const Todo = () => {
   //todo를 담고있는 상태데이터입니다
   const [todos, setTodo] = useState<TodoProps[]>([]);
   //todo를 추가할떄의 input state입니다.
-  const [todoInput, inputHandler] = useInput("");
+  const [todoInput, inputHandler, error, todoSetValue] = useInput("");
   //todo를 수정할떄의 input state입니다.
   const [editInput, setEditInput] = useState("");
   //내가 최근 클릭한 todo의 id를 관리합니다.
@@ -47,11 +47,13 @@ const Todo = () => {
 
   //todo를 더해주는 함수입니다.
   const addTodo = async () => {
+    if (todoInput == "") return;
     try {
       const res = await createTodoApi(todoInput);
       setTodo((pre) => [...pre, res.data]);
       inputRef.current?.focus();
       inputRef.current!.value = "";
+      todoSetValue("");
     } catch (e) {
       alert("만들기 실패");
     }
@@ -126,45 +128,57 @@ const Todo = () => {
   };
 
   return (
-    <div className="todoList">
-      <input
-        ref={inputRef}
-        data-testid="new-todo-input"
-        onChange={inputHandler}
-        placeholder="할일을 입력해주세요"
-      />
-      <button data-testid="new-todo-add-button" onClick={addTodo}>
-        추가
-      </button>
-      <ul>
-        {todos?.map((work: TodoProps) => {
-          const { id, todo, isCompleted } = work;
-          if (clickId == id)
-            return (
-              <ClickedTodo
-                editInput={editInput}
-                editChangeHandler={editChangeHandler}
-                updateTodo={updateTodo}
-                cancelHandler={cancelHandler}
-                id={id}
-                checkBoxhandle={checkBoxhandle}
-                isCompleted={isCompleted}
-              ></ClickedTodo>
-            );
-          else {
-            return (
-              <NoClickedTodo
-                todo={todo}
-                retouchHandler={retouchHandler}
-                deleteTodo={deleteTodo}
-                id={id}
-                isCompleted={isCompleted}
-                checkBoxhandle={checkBoxhandle}
-              ></NoClickedTodo>
-            );
-          }
-        })}
-      </ul>
+    <div className="todopage">
+      <div className="todopage-todoList">
+        <h1>Todo</h1>
+        <div className="todoList-header">
+          <input
+            ref={inputRef}
+            data-testid="new-todo-input"
+            onChange={inputHandler}
+            placeholder="할일을 입력해주세요"
+          />
+          <button
+            className="todoList-header-button"
+            data-testid="new-todo-add-button"
+            onClick={addTodo}
+          >
+            추가
+          </button>
+        </div>
+
+        <ul className="todopage-todoList-work">
+          {todos?.map((work: TodoProps) => {
+            const { id, todo, isCompleted } = work;
+            if (clickId == id)
+              return (
+                <ClickedTodo
+                  key={id}
+                  editInput={editInput}
+                  editChangeHandler={editChangeHandler}
+                  updateTodo={updateTodo}
+                  cancelHandler={cancelHandler}
+                  id={id}
+                  checkBoxhandle={checkBoxhandle}
+                  isCompleted={isCompleted}
+                ></ClickedTodo>
+              );
+            else {
+              return (
+                <NoClickedTodo
+                  key={id}
+                  todo={todo}
+                  retouchHandler={retouchHandler}
+                  deleteTodo={deleteTodo}
+                  id={id}
+                  isCompleted={isCompleted}
+                  checkBoxhandle={checkBoxhandle}
+                ></NoClickedTodo>
+              );
+            }
+          })}
+        </ul>
+      </div>
     </div>
   );
 };
