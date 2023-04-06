@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInApi } from "../../api/signInApi";
 import useInput from "../../hook/useInput";
@@ -68,7 +68,7 @@ const SignIn = () => {
       <button
         ref={buttonRef}
         onClick={handleSubmit}
-        data-testid="signup-button"
+        data-testid="signin-button"
       >
         로그인
       </button>
