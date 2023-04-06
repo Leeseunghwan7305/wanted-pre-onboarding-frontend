@@ -1,7 +1,5 @@
-import React from "react";
-
 const Init = () => {
-  return <div>hi</div>;
+  return <div>안녕하세영 반가워영</div>;
 };
 
 export default Init;

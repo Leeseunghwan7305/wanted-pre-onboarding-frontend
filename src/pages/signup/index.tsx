@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpApi } from "../../api/signUpApi";
 import useInput from "../../hook/useInput";
@@ -7,22 +7,27 @@ import "./index.scss";
 
 const SignUp = () => {
   const navigator = useNavigate();
+
+  //email,password의 유효성여부와 값을 가지고있는 custom hook입니다.
   const [email, emailHandler, emailError] = useInput("", emailValidation);
   const [password, passwordHandler, passwordError] = useInput(
     "",
     passwordValidation
   );
-  const buttonRef = useRef<any>(null);
 
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  //email과password유효성검사여부에 따라 버튼을 활성/비활성화해주는 훅입니다.
   useEffect(() => {
     if (emailError || passwordError) {
-      buttonRef.current.disabled = true;
+      buttonRef.current!.disabled = true;
     } else {
-      buttonRef.current.disabled = false;
+      buttonRef.current!.disabled = false;
     }
   }, [emailError, passwordError]);
 
-  const handleSubmit = async () => {
+  //회원가입 버튼을 눌렀을떄 실행될 함수입니다.
+  const handleSubmit = useCallback(async () => {
     try {
       await signUpApi(email, password);
       alert("회원가입에 성공하셨습니다 !");
@@ -30,7 +35,7 @@ const SignUp = () => {
     } catch (e) {
       alert("회원가입에 실패하였습니다 !");
     }
-  };
+  }, []);
 
   return (
     <div className="signUpBox">

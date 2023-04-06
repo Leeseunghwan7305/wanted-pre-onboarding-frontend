@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInApi } from "../../api/signInApi";
 import useInput from "../../hook/useInput";
@@ -6,34 +6,37 @@ import { emailValidation, passwordValidation } from "../../util/validation";
 import "./index.scss";
 const SignIn = () => {
   const navigator = useNavigate();
+
+  //email,password의 유효성여부와 값을 가지고있는 custom hook입니다.
   const [email, emailHandler, emailError] = useInput("", emailValidation);
   const [password, passwordHandler, passwordError] = useInput(
     "",
     passwordValidation
   );
-  const buttonRef = useRef<any>(null);
 
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  //email과password유효성검사여부에 따라 버튼을 활성/비활성화해주는 훅입니다.
   useEffect(() => {
     if (emailError || passwordError) {
-      buttonRef.current.disabled = true;
+      buttonRef.current!.disabled = true;
     } else {
-      buttonRef.current.disabled = false;
+      buttonRef.current!.disabled = false;
     }
   }, [emailError, passwordError]);
 
-  const handleSubmit = async () => {
+  //로그인버튼을 눌렀을떄 실행될 함수입니다.
+  const handleSubmit = useCallback(async () => {
     try {
       const res = await signInApi(email, password);
       const token = res.data.access_token;
-      console.log(token);
       localStorage.setItem("token", token);
       navigator("/todo");
-      //로컬스토리지에 저장
     } catch (e) {
       console.log(e);
       alert("로그인에 실패하셨습니다");
     }
-  };
+  }, []);
 
   return (
     <div className="signInBox">
