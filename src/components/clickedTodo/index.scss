@@ -37,7 +37,14 @@
     right: 0;
     font-size: 1rem;
   }
+  & > li > div > button:nth-child(1) {
+    background-color: #cd84f1;
+  }
+  & > li > div > button:nth-child(2) {
+    background-color: #cd84f1;
+  }
   & > li > div > button {
+    color: white;
     width: 60px;
     height: 40px;
     border: none;
@@ -48,11 +55,9 @@
       width: 50px;
       height: 30px;
     }
-
     &:hover {
-      background-color: blue;
-      opacity: 0.6;
       color: white;
+      scale: 1.02;
     }
   }
 }

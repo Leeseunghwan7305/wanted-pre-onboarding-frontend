@@ -127,6 +127,12 @@ const Todo = () => {
     }
   };
 
+  //로그아웃을 시켜주는 함수입니다.
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+
+    navigator("/signin");
+  };
   return (
     <div className="todopage">
       <div className="todopage-todoList">
@@ -178,6 +184,9 @@ const Todo = () => {
             }
           })}
         </ul>
+      </div>
+      <div onClick={logoutHandler} className="logout">
+        로그아웃
       </div>
     </div>
   );

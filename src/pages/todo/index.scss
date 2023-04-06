@@ -20,6 +20,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .todopage-todoList {
   & > h1 {
@@ -67,6 +68,10 @@
   border-radius: 5px;
   margin-left: 5px;
   cursor: pointer;
+  background-color: #0984e3;
+  opacity: 0.6;
+  color: white;
+  font-weight: bold;
   &:hover {
     scale: 1.02;
   }
@@ -74,5 +79,18 @@
     zoom: 0.8;
     width: 14rem;
     height: 40px;
+  }
+}
+
+.logout {
+  position: absolute;
+  bottom: 5rem;
+  right: 5rem;
+  font-size: 3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.5s all;
+  &:hover {
+    transform: scale(1.2);
   }
 }

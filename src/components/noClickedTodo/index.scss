@@ -33,13 +33,20 @@
     position: absolute;
     right: 0;
   }
+
+  & > li > div > button:nth-child(1) {
+    background-color: #54a0ff;
+  }
+  & > li > div > button:nth-child(2) {
+    background-color: #0abde3;
+  }
   & > li > div > button {
     width: 6rem;
     height: 4rem;
     border: none;
     border-radius: 5px;
     margin-left: 1rem;
-
+    color: white;
     @media (max-width: 768px) {
       zoom: 0.8;
       width: 50px;
@@ -47,9 +54,8 @@
     }
     transition: 0.5 all;
     &:hover {
-      background-color: blue;
-      opacity: 0.6;
       color: white;
+      scale: 1.05;
     }
   }
 }
