@@ -6,6 +6,8 @@ import {
   getTodoApi,
   updateTodoApi,
 } from "../../api/todoApi";
+import ClickedTodo from "../../components/clickedTodo";
+import NoClickedTodo from "../../components/noClickedTodo";
 import useInput from "../../hook/useInput";
 import { TodoProps } from "../../types/todo";
 import { tokenTest } from "../../util/tokenTest";
@@ -58,15 +60,8 @@ const Todo = () => {
   //todo를 업데이트해주는 함수입니다.
   const updateTodo = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement>) => {
-      const id = e.currentTarget.id;
+      let id = e.currentTarget.id;
       let findTodo = todos.find((todo) => todo.id == id);
-
-      if (e.currentTarget.innerText == "수정" && findTodo) {
-        setClickId(findTodo.id);
-        setEditInput(findTodo.todo);
-        return;
-      }
-
       if (findTodo) {
         try {
           const result = await updateTodoApi(
@@ -87,6 +82,16 @@ const Todo = () => {
     [editInput, todos]
   );
 
+  //수정버튼을 눌렀을떄 실행되는 함수입니다.
+  const retouchHandler = (id: string) => {
+    let findTodo = todos.find((todo) => todo.id == id);
+    if (findTodo) {
+      setClickId(findTodo.id);
+      setEditInput(findTodo.todo);
+    }
+    return;
+  };
+
   //checkbox를 업데이트해주는 함수입니다.
   const checkBoxhandle = useCallback(
     async (id: string) => {
@@ -106,67 +111,58 @@ const Todo = () => {
   //todo를 삭제해주는 함수입니다.
   const deleteTodo = useCallback(
     async (id: string) => {
-      if (clickId == id) {
-        setClickId("");
-        return;
-      } else {
-        await deleteTodoApi(id);
-        const newTodo = todos.filter((todo) => todo.id != id);
-        setTodo(newTodo);
-      }
+      await deleteTodoApi(id);
+      const newTodo = todos.filter((todo) => todo.id != id);
+      setTodo(newTodo);
     },
     [clickId, todos]
   );
+
+  // 취소 버튼을 눌렀을떄 실행되는 함수입니다.
+  const cancelHandler = (id: string) => {
+    if (clickId == id) {
+      setClickId("");
+    }
+  };
 
   return (
     <div className="todoList">
       <input
         ref={inputRef}
-        data-testid="new-todos-input"
+        data-testid="new-todo-input"
         onChange={inputHandler}
         placeholder="할일을 입력해주세요"
       />
-      <button data-testid="new-todos-add-button" onClick={addTodo}>
+      <button data-testid="new-todo-add-button" onClick={addTodo}>
         추가
       </button>
       <ul>
         {todos?.map((work: TodoProps) => {
           const { id, todo, isCompleted } = work;
-          return (
-            <li key={id}>
-              <label>
-                <input
-                  onClick={() => checkBoxhandle(id)}
-                  checked={isCompleted}
-                  type="checkbox"
-                  readOnly
-                />
-                {clickId == id ? (
-                  <input
-                    data-testid="modify-input"
-                    value={editInput}
-                    onChange={editChangeHandler}
-                    placeholder="수정될 내용을 입력해주세요"
-                  ></input>
-                ) : (
-                  <span>{todo}</span>
-                )}
-                <button
-                  data-testid="submit-button"
-                  id={id}
-                  onClick={updateTodo}
-                >
-                  {clickId == id ? "제출" : "수정"}
-                </button>
-                <button
-                  onClick={() => deleteTodo(id)}
-                  data-testid="cancel-button"
-                >
-                  {clickId == id ? "취소" : "삭제"}
-                </button>
-              </label>
-            </li>
-          );
+          if (clickId == id)
+            return (
+              <ClickedTodo
+                editInput={editInput}
+                editChangeHandler={editChangeHandler}
+                updateTodo={updateTodo}
+                cancelHandler={cancelHandler}
+                id={id}
+                checkBoxhandle={checkBoxhandle}
+                isCompleted={isCompleted}
+              ></ClickedTodo>
+            );
+          else {
+            return (
+              <NoClickedTodo
+                todo={todo}
+                retouchHandler={retouchHandler}
+                deleteTodo={deleteTodo}
+                id={id}
+                isCompleted={isCompleted}
+                checkBoxhandle={checkBoxhandle}
+              ></NoClickedTodo>
+            );
+          }
         })}
       </ul>
     </div>

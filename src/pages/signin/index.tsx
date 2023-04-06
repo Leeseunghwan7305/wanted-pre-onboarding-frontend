@@ -16,7 +16,7 @@ const SignIn = () => {
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  //email과password유효성검사여부에 따라 버튼을 활성/비활성화해주는 훅입니다.
+  //email과password유효성검사여부에 따라 버튼을 활성/비활성화해주는 함수입니다.
   useEffect(() => {
     if (emailError || passwordError) {
       buttonRef.current!.disabled = true;
@@ -25,8 +25,8 @@ const SignIn = () => {
     }
   }, [emailError, passwordError]);
 
-  //로그인버튼을 눌렀을떄 실행될 함수입니다.
-  const handleSubmit = useCallback(async () => {
+  //로그인 버튼을 눌렀을때 실행되는 함수입니다.
+  const handleSubmit = async () => {
     try {
       const res = await signInApi(email, password);
       const token = res.data.access_token;
@@ -36,8 +36,7 @@ const SignIn = () => {
       console.log(e);
       alert("로그인에 실패하셨습니다");
     }
-  }, []);
-
+  };
   return (
     <div className="signInBox">
       <input

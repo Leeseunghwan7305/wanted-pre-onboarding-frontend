@@ -27,7 +27,7 @@ const SignUp = () => {
   }, [emailError, passwordError]);
 
   //회원가입 버튼을 눌렀을떄 실행될 함수입니다.
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = async () => {
     try {
       await signUpApi(email, password);
       alert("회원가입에 성공하셨습니다 !");
@@ -35,8 +35,7 @@ const SignUp = () => {
     } catch (e) {
       alert("회원가입에 실패하였습니다 !");
     }
-  }, []);
-
+  };
   return (
     <div className="signUpBox">
       <input
