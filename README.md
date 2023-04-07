@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+## 원티드 프리인턴쉽 과제
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+원티드에서 진행하는 프리인턴쉽 사전 과제입니다.
 
-## Available Scripts
+# 배포 링크
 
-In the project directory, you can run:
 
-### `npm start`
+<aside>
+🙃 배포 링크
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[https://wanted-pre-onboarding-frontend-inky-nine.vercel.app/](https://wanted-pre-onboarding-frontend-inky-nine.vercel.app/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+</aside>
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 과제 링크
 
-### `npm run build`
+<aside>
+🙃 과제링크
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[https://github.com/walking-sunset/selection-task#api](https://github.com/walking-sunset/selection-task#api)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+</aside>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+# 프로젝트 실행 방법
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<aside>
+🙃 실행방법
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. 레포 클론
+    
+    git clone [https://github.com/Leeseunghwan7305/wanted-pre-onboarding-frontend.git](https://github.com/Leeseunghwan7305/wanted-pre-onboarding-frontend.git)
+    
+2. 패키지 설치
+    
+    npm i
+    
+3. 애플리케이션 실행
+    
+    npm start
+    
+</aside>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 구현 사항
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. custom hook을 통해 함수를 재사용
+2. useMemo,useCallback,react.memo를 이용해 렌더링을 최적화
+3. jwt를 이용한 로그인 로직 구현 , 유효성 검사를 통한 로그인 버튼 활성/비활성화
+4. 모바일 , 테블릿 , 데스크탑 반응형 웹 디자인
+5. CRUD 로직구현
+6. 사용자가 토큰을 가지고있지 않았을떄 로그인페이지로 리다이렉팅
+7. 로그아웃을 눌렀을떄 토큰 삭제
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
