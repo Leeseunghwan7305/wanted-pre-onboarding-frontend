@@ -17,7 +17,6 @@ const useInput = <T>(
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value as unknown as T;
-      console.log(newValue);
       if (validation && !validation(newValue)) {
         setError(true);
       } else {
