@@ -58,7 +58,10 @@
 
 .todopage-todoList-work {
   height: 50vh;
-  overflow: hidden;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .todoList-header-button {
