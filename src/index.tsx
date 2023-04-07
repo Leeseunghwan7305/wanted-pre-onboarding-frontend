@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/WANTED-TODO/">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>

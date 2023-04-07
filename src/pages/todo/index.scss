@@ -58,7 +58,7 @@
 
 .todopage-todoList-work {
   height: 50vh;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .todoList-header-button {
@@ -86,7 +86,7 @@
   position: absolute;
   bottom: 5rem;
   right: 5rem;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
   transition: 0.5s all;
