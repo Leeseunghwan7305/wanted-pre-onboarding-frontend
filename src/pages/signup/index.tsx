@@ -64,6 +64,7 @@ const SignUp = () => {
         placeholder="비밀번호를 입력해주세요."
         onChange={passwordHandler}
         data-testid="password-input"
+        type="password"
       />
       {passwordError ? (
         <div className="signUpBox_password-fail">
